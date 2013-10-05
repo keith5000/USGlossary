@@ -23,14 +23,18 @@ app.post('/', function(request, response) {
 	var masterBranchBaseUrl = "https://raw.github.com/keith5000/USGlossary/";
 	
 	for (var commitCount=0; commitCount < payload.commits.length; commitCount++) {
-		for (var addedCount=0; addedCount < payload.commits.added.length; addedCount++) {
-			var rawFileUrl = masterBranchBaseUrl + payload.commits.added[addedCount];
-			console.log("Added url: " + rawFileUrl);
+		if (payload.commits.added) {
+			for (var addedCount=0; addedCount < payload.commits.added.length; addedCount++) {
+				var rawFileUrl = masterBranchBaseUrl + payload.commits.added[addedCount];
+				console.log("Added url: " + rawFileUrl);
+			}
 		}
 		
-		for (var modifiedCount=0; modifiedCount < payload.commits.modified.length; modifiedCount++) {
-			var rawFileUrl = masterBranchBaseUrl + payload.commits.modified[modifiedCount];
-			console.log("Modified url: " + rawFileUrl);
+		if (payload.commits.modified) {
+			for (var modifiedCount=0; modifiedCount < payload.commits.modified.length; modifiedCount++) {
+				var rawFileUrl = masterBranchBaseUrl + payload.commits.modified[modifiedCount];
+				console.log("Modified url: " + rawFileUrl);
+			}
 		}
 	}
   
