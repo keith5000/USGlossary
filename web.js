@@ -11,21 +11,23 @@ app.get('/', function(request, response) {
 
 app.post('/', function(request, response) {
 	console.log("request = " + util.inspect(request.body));
-	if (!request || !request.body || !request.body.commits) {
+	if (!request || !request.body || !request.body.payload) {
 		console.log("No payload specified.");
 		return;
 	};
 	
+	var payload = JSON.parse(request.body.payload);
+	
 	var masterBranchBaseUrl = "https://raw.github.com/keith5000/USGlossary/";
 	
-	for (var commitCount=0; commitCount < request.body.commits.length; commitCount++) {
-		for (var addedCount=0; addedCount < request.body.commits.added; addedCount++) {
-			var rawFileUrl = masterBranchBaseUrl + request.body.commits.added[addedCount];
+	for (var commitCount=0; commitCount < payload.commits.length; commitCount++) {
+		for (var addedCount=0; addedCount < payload.commits.added; addedCount++) {
+			var rawFileUrl = masterBranchBaseUrl + payload.commits.added[addedCount];
 			console.log("Added url: " + rawFileUrl);
 		}
 		
-		for (var modifiedCount=0; modifiedCount < request.body.commits.modified; modifiedCount++) {
-			var rawFileUrl = masterBranchBaseUrl + request.body.commits.modified[modifiedCount];
+		for (var modifiedCount=0; modifiedCount < payload.commits.modified; modifiedCount++) {
+			var rawFileUrl = masterBranchBaseUrl + payload.commits.modified[modifiedCount];
 			console.log("Modified url: " + rawFileUrl);
 		}
 	}
