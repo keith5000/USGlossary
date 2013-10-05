@@ -17,6 +17,7 @@ app.post('/', function(request, response) {
 	};
 	
 	var payload = JSON.parse(request.body.payload);
+	console.log("payload = " + util.inspect(payload));
 	
 	var masterBranchBaseUrl = "https://raw.github.com/keith5000/USGlossary/";
 	
