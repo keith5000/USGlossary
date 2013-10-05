@@ -18,16 +18,17 @@ app.post('/', function(request, response) {
 	
 	var payload = JSON.parse(request.body.payload);
 	console.log("payload = " + util.inspect(payload));
+	console.log("commits length = " + payload.commits.length);
 	
 	var masterBranchBaseUrl = "https://raw.github.com/keith5000/USGlossary/";
 	
 	for (var commitCount=0; commitCount < payload.commits.length; commitCount++) {
-		for (var addedCount=0; addedCount < payload.commits.added; addedCount++) {
+		for (var addedCount=0; addedCount < payload.commits.added.length; addedCount++) {
 			var rawFileUrl = masterBranchBaseUrl + payload.commits.added[addedCount];
 			console.log("Added url: " + rawFileUrl);
 		}
 		
-		for (var modifiedCount=0; modifiedCount < payload.commits.modified; modifiedCount++) {
+		for (var modifiedCount=0; modifiedCount < payload.commits.modified.length; modifiedCount++) {
 			var rawFileUrl = masterBranchBaseUrl + payload.commits.modified[modifiedCount];
 			console.log("Modified url: " + rawFileUrl);
 		}
