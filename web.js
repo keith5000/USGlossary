@@ -10,9 +10,11 @@ app.get('/', function(request, response) {
 });
 
 app.post('/', function(request, response) {
-	if (!request || !request.body || !request.body.commits) return;
-	
 	console.log("request = " + util.inspect(request.body));
+	if (!request || !request.body || !request.body.commits) {
+		console.log("No payload specified.");
+		return;
+	};
 	
 	var masterBranchBaseUrl = "https://raw.github.com/keith5000/USGlossary/";
 	
